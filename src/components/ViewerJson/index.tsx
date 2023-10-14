@@ -1,4 +1,4 @@
-import { ContainerSC } from "./ViewerJsonStyles"
+import { ContainerSC, HomeButtonSC } from "./ViewerJsonStyles"
 import { IViewJsonProps } from "./types"
 
 export const ViewerJson = (props: IViewJsonProps) => {
@@ -12,7 +12,7 @@ export const ViewerJson = (props: IViewJsonProps) => {
 
   return (
     <ContainerSC>
-      <button onClick={handleOnClick}>Voltar</button>
+      <HomeButtonSC onClick={handleOnClick}>Voltar</HomeButtonSC>
       {JSON.stringify(file)}
     </ContainerSC>
   )
