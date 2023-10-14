@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
+import { StatusType } from "../../shared/types";
 
 export interface IHomeProps {
-  stateViewJson: [setViewJson: Dispatch<SetStateAction<boolean>>],
+  status: [status: StatusType, setStatus: Dispatch<SetStateAction<StatusType>>]
+  file: [setFile: Dispatch<SetStateAction<object>>]
 }

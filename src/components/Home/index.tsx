@@ -1,22 +1,30 @@
-import React, { useState } from "react"
+import React from "react"
 import { ContainerSC, InvalidFileSC, LoadButtonSC, LoadJSONSC, SubTitleSC, TitleSC } from "./homeStyles"
 import { IHomeProps } from "./types"
+import { readJSON } from "./utils"
 
 export const Home = (props: IHomeProps) => {
-  const [isValidExtension, setIsValidExtension] = useState<boolean | null>(null)
+  const [status, setStatus] = props.status
+  const [setFile] = props.file
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
-  const [setViewJson] = props.stateViewJson
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files || []
     if (files.length) {
       const file = files[0]
       const isValid = file.type === 'application/json'
-      setIsValidExtension(isValid)
-      setViewJson(isValid)
+      setStatus(isValid ? 'validFile' : 'invalidExtension')
 
+      if (isValid) {
+        const { jsonParsed } = await readJSON(file)
+
+        if ('error' in jsonParsed && jsonParsed.error) {
+          setStatus('syntaxError')
+          return
+        }
+        setFile(jsonParsed)
+      }
     }
   }
   return (
@@ -27,12 +35,13 @@ export const Home = (props: IHomeProps) => {
         type="file"
         ref={inputRef}
         onChange={handleOnChange}
+        accept=".json"
       />
       <LoadButtonSC
         type="button"
         onClick={() => inputRef!.current!.click()}
       >Load JSON</LoadButtonSC>
-      {isValidExtension === false && <InvalidFileSC>Invalid file. Please load a valid JSON file.</InvalidFileSC>}
+      {(status === 'invalidExtension' || status === 'syntaxError') && <InvalidFileSC>Invalid file. Please load a valid JSON file.</InvalidFileSC>}
     </ContainerSC>
   )
 }

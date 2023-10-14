@@ -1,13 +1,19 @@
-import React from "react"
 import { ContainerSC } from "./ViewerJsonStyles"
 import { IViewJsonProps } from "./types"
 
 export const ViewerJson = (props: IViewJsonProps) => {
-  const [setViewJson] = props.stateViewJson
+  const [file, setFile] = props.file
+  const [setStatus] = props.status
+
+  const handleOnClick = () => {
+    setStatus(undefined)
+    setFile({})
+  }
+
   return (
     <ContainerSC>
-      <button onClick={() => setViewJson(false)}>Voltar</button>
-      ViewerJson
+      <button onClick={handleOnClick}>Voltar</button>
+      {JSON.stringify(file)}
     </ContainerSC>
   )
 }
