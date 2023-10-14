@@ -1,5 +1,5 @@
 import React from "react"
-import { ContainerSC, InvalidFileSC, LoadButtonSC, LoadJSONSC, SubTitleSC, TitleSC } from "./homeStyles"
+import { ContainerSC, InvalidFileSC, LoadButtonSC, LoadJSONSC, SubTitleSC, TitleSC } from "./HomeStyles"
 import { IHomeProps } from "./types"
 import { readJSON } from "./utils"
 
