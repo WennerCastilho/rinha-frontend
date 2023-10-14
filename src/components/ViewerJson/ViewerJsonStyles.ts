@@ -19,4 +19,8 @@ export const HomeButtonSC = styled.button`
   border: 1px solid #000;
   padding: 6px 12px;
   opacity: 0.7;
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
 `

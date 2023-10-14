@@ -12,7 +12,7 @@ export const ViewerJson = (props: IViewJsonProps) => {
 
   return (
     <ContainerSC>
-      <HomeButtonSC onClick={handleOnClick}>Voltar</HomeButtonSC>
+      <HomeButtonSC onClick={handleOnClick}>⬅️ Voltar</HomeButtonSC>
       {JSON.stringify(file)}
     </ContainerSC>
   )
